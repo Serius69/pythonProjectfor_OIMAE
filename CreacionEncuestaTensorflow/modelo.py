@@ -1,5 +1,7 @@
 # modelo.py
+import numpy as np
 import tensorflow as tf
+from keras.src.utils import pad_sequences
 
 
 def crear_modelo(max_len):

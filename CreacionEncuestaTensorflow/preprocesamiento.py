@@ -9,10 +9,8 @@ def cargar_encuestas():
         "¿Con qué frecuencia usa redes sociales?",
         "¿Qué tan satisfecho está con su trabajo?",
         "¿Cuál es su nivel de estudios?",
-        # Más encuestas hasta completar 30
     ]
     return encuestas
-
 
 def procesar_datos(encuestas):
     tokenizer = Tokenizer(num_words=1000, oov_token="<OOV>")

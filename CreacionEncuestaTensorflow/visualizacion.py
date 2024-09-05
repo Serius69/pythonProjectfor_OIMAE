@@ -2,7 +2,7 @@
 from tensorflow.keras.utils import plot_model
 import matplotlib.pyplot as plt
 import numpy as np
-
+import tensorflow as tf
 
 def visualizar_modelo(model):
     plot_model(model, to_file='modelo_red_neuronal.png', show_shapes=True, show_layer_names=True)
