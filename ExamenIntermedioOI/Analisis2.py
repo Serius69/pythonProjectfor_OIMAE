@@ -14,7 +14,8 @@ data = [
 ]
 
 # Crear el DataFrame
-df = pd.DataFrame(data, index=[50, 70, 90, 110, 130, 150], columns=[2500, 3500, 4500, 5500, 6500, 7500])
+df = pd.DataFrame(data, index=['-20%', '-15%', '-10%', '-5%', '0%', '5%','10%','15%','20%'],
+                  columns=[2500, 3500, 4500, 5500, 6500, 7500])
 
 # Graficar los datos
 plt.figure(figsize=(12, 8))

@@ -1,0 +1,5 @@
+attribute,minus_one_step,minus_half_step,plus_half_step,plus_one_step
+Clarity,5,25,15,30
+Color,20,20,15,15
+Cut,15,15,5,2
+Weight,10,20,15,15
