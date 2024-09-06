@@ -1,40 +1,38 @@
-import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
-# Read the CSV file
-df = pd.read_csv('diamond_data.csv')
+# Datos para las 7 P's del marketing
+categories = ['Producto', 'Precio', 'Plaza', 'Promoción', 'Personas', 'Procesos', 'Evidencia Física']
+base_budget = [20, 15, 10, 25, 10, 10, 10]
+moderate_change = [5, 10, 5, 15, 5, 5, 5]
+significant_change = [10, 20, 15, 30, 10, 15, 10]
 
-# Create the figure and axis
+# Crear el gráfico
 fig, ax = plt.subplots(figsize=(12, 8))
 
-# Define colors for each step
-colors = ['#1f77b4', '#63aad1', '#ff7f0e', '#ff9e4a']
+# Posiciones de las barras
+y_pos = np.arange(len(categories))
 
-# Iterate through each attribute
-for i, attr in enumerate(df['attribute']):
-    values = df.loc[i, ['minus_one_step', 'minus_half_step', 'plus_half_step', 'plus_one_step']]
-    left = -values['minus_one_step'] - values['minus_half_step']
+# Crear barras apiladas
+ax.barh(y_pos, base_budget, align='center', alpha=0.8, label='Presupuesto Base')
+ax.barh(y_pos, moderate_change, left=base_budget, align='center', alpha=0.8, label='Cambio Moderado')
+ax.barh(y_pos, significant_change, left=np.array(base_budget) + np.array(moderate_change), align='center', alpha=0.8, label='Cambio Significativo')
 
-    # Plot the bars
-    ax.barh(attr, values['minus_one_step'], left=left, color=colors[0], height=0.5)
-    ax.barh(attr, values['minus_half_step'], left=left + values['minus_one_step'], color=colors[1], height=0.5)
-    ax.barh(attr, values['plus_half_step'], left=0, color=colors[2], height=0.5)
-    ax.barh(attr, values['plus_one_step'], left=values['plus_half_step'], color=colors[3], height=0.5)
+# Personalizar el gráfico
+ax.set_yticks(y_pos)
+ax.set_yticklabels(categories)
+ax.invert_yaxis()  # Invertir el eje Y para que la primera categoría esté arriba
+ax.set_xlabel('Presupuesto (%)')
+ax.set_title('Análisis de Sensibilidad - Producción de Boletos de Lotería')
 
-# Customize the plot
-ax.set_xlabel('Change in average diamond price [%]')
-ax.set_ylabel('Diamond attribute')
-ax.set_title('Impact of Diamond Attributes on Price')
-ax.grid(axis='x', linestyle='--', alpha=0.7)
+# Añadir una leyenda
+ax.legend()
 
-# Add legend
-legend_elements = [plt.Rectangle((0, 0), 1, 1, color=colors[i], label=label)
-                   for i, label in enumerate(['-1 step', '-1/2 step', '+1/2 step', '+1 step'])]
-ax.legend(handles=legend_elements, loc='upper right', bbox_to_anchor=(1.15, 1))
+# Añadir etiquetas de valor en las barras
+for i, category in enumerate(categories):
+    total = base_budget[i] + moderate_change[i] + significant_change[i]
+    ax.text(total + 1, i, f'{total}%', va='center')
 
-# Adjust layout and save the figure
+# Ajustar el diseño y mostrar el gráfico
 plt.tight_layout()
-plt.savefig('diamond_price_change.png', dpi=300, bbox_inches='tight')
-plt.close()
-
-print("Graph has been saved as 'diamond_price_change.png'")
+plt.show()
