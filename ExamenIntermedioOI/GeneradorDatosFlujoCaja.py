@@ -1,3 +1,4 @@
+# generadordlujocaja
 import pandas as pd
 
 # Datos de prueba: VAN en función del precio del boleto (columnas) y la cantidad vendida (filas)
@@ -14,7 +15,7 @@ data = {
 }
 
 # Crear el DataFrame
-df = pd.DataFrame(data, index=['50K', '70K', '90K', '110K', '130K'])  # Monto vendido [$ mil]
+df = pd.DataFrame(data, index=[50000, 70000, 90000, 110000, 130000])  # Monto vendido [$ mil]
 
 # Guardar el DataFrame en un archivo Excel
 df.to_excel('data_prueba_sensibilidad.xlsx')

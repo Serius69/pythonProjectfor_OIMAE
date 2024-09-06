@@ -4,13 +4,11 @@ import seaborn as sns
 import numpy as np
 from scipy import stats
 
-
 # Función para cargar y preprocesar los datos
 def load_and_preprocess_data(file_path):
     df = pd.read_excel(file_path)
     df['Fecha'] = pd.to_datetime(df['Fecha'])
     return df
-
 
 # Función para realizar el análisis de sensibilidad
 def sensitivity_analysis(df):
@@ -20,7 +18,7 @@ def sensitivity_analysis(df):
     for prize in prize_types:
         # Calcular la elasticidad de la demanda
         pct_change = df[prize].pct_change()
-        total_sales_pct_change = df['Ventas Totales'].pct_change()
+        total_sales_pct_change = df['Cantidad Total Boletos Industria'].pct_change()
         elasticity = pct_change / total_sales_pct_change
 
         # Calcular estadísticas de sensibilidad
@@ -69,7 +67,7 @@ def main(file_path):
     fig = create_visualization(df, sensitivities)
 
     # Guardar resultados
-    fig.savefig('lottery_ticket_sensitivity_analysis.png', dpi=300, bbox_inches='tight')
+    fig.savefig('lottery_ticket_sensitivity_analysis_2026.png', dpi=300, bbox_inches='tight')
     sensitivities.to_csv('lottery_ticket_sensitivities.csv')
 
     print(
@@ -78,5 +76,5 @@ def main(file_path):
 
 # Ejecutar el script
 if __name__ == "__main__":
-    file_path = "lottery_sales_data.xlsx"  # Reemplaza esto con la ruta real de tu archivo
+    file_path = "lottery_sales_data_months - 2026.xlsx"
     main(file_path)
