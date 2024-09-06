@@ -6,6 +6,8 @@ from visualizacion import visualizar_modelo, visualizar_interacciones
 # Cargar y procesar los datos
 encuestas = cargar_encuestas()
 X_train, y_train, tokenizer, max_len = procesar_datos(encuestas)
+print(f"X_train shape: {X_train.shape}")  # Debe ser (n_samples, max_len-1)
+print(f"y_train shape: {y_train.shape}")  # Debe ser (n_samples, max_len-1)
 
 # Crear el modelo
 model = crear_modelo(max_len)
